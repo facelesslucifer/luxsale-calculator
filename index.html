@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>Lux'Sale</title>
+        <meta name="generator" content="Bootply" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+		<!--[if lt IE 9]>
+			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link href="css/styles.css" rel="stylesheet">
+	</head>
+	<body ng-app="main">
+        <!-- Wrap all page content here -->
+        <div id="wrap">
+
+            <!-- Fixed navbar -->
+            <div class="navbar navbar-default navbar-fixed-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Lux'Sale</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
+                </div>
+            </div>
+
+            <!-- Begin page content -->
+            <div class="container" ng-controller="mainController as mainCtrl">
+                <div class="page-header">
+                    <h1>Price calculator</h1>
+                </div>
+                <div class="row col-md-12">
+                    <h4>Total Exchange Rate : <span ng-bind="exchangeRate"></span></h4>
+                </div>
+                <div class="row col-md-12">
+                    <h4>Item Price :
+                        <input type="number" min="1" ng-model="itemPrice"
+                                        ng-model-options="{ debounce: 1000 }"
+                                        ng-change="dataPriceChange()" /> SGD
+                    </h4>
+                    <span ng-show="invalid">Price is invalid.</span>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="dataItem" class="control-label">Item :</label>
+                        <select class="form-control" id="dataItem" ng-model="dataItem" ng-change="dataItemChange()">
+                            <option value="0"> -- Select -- </option>
+                            <option ng-repeat="item in model.items" value="{{ item.value }}">{{ item.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label for="dataType">Type :</label>
+                        <select class="form-control" id="dataType" ng-model="dataType" ng-change="dataTypeChange()">
+                            <option value="0"> -- Select -- </option>
+                            <option ng-repeat="item in model.types" value="{{ item.value }}">{{ item.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                            <label for="dataQuantity">Quantity :</label>
+                            <select class="form-control" id="dataQuantity" ng-model="dataQuantity" ng-change="dataQuantityChange()">
+                                <option value="0"> -- Select -- </option>
+                                <option ng-repeat="price in model.quantity" value="{{ price.q }}">{{ price.q }}</option>
+                            </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <table class="table borderless">
+                            <tr>
+                                <td>Delivery Fees :</td>
+                                <td>{{ dataPriceDelivery | number }}</td>
+                                <td>SGD</td>
+                            <tr>
+                            <tr>
+                                <td>Service Fees :</td>
+                                <td>{{ dataPriceService | number }}</td>
+                                <td>SGD</td>
+                            </tr>
+                            <tr>
+                                <td>Total Fees :</td>
+                                <td>{{ dataTotal | number }}</td>
+                                <td>Kyat</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                    <!-- <button type="submit" class="btn btn-success">Save</button> -->
+
+
+                <!-- <div class="form-group">
+                <div class="row">
+                    <div>
+                        <h1>History List</h1>
+                    </div>
+                    <table class="table table-striped">
+                        <tr>
+                            <th>#</th>
+                            <th>Item</th>
+                            <th>Type</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Shoes</td>
+                            <td>Shoes with Medium Heel</td>
+                            <td>2</td>
+                            <td>24</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Shoes</td>
+                            <td>Shoes with Medium Heel</td>
+                            <td>2</td>
+                            <td>24</td>
+                        </tr>
+                    </table>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+
+        <div id="footer">
+            <div class="container">
+                <div class="text-muted credit">
+                    &copy; 2015 by Lux'Sale Group
+
+                    <div class="pull-right text-muted">
+                        <div class="fb-like" data-href="https://www.facebook.com/luxsale" data-width="400" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+                        <div id="fb-root"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- script references -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-cookies.min.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/services.js"></script>
+        <script src="js/data.js"></script>
+        <script src="js/lib.js"></script>
+    </body>
+</html>
