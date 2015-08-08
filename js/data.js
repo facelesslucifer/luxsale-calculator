@@ -66,5 +66,31 @@ var itemType = [
                 "price": [{"q":1, "p":8}, {"q":2, "p":12}, {"q":3, "p":15}, {"q":4, "p":16}, {"q":5, "p":17}]
             }
         ]
+    },
+    {
+        "name": "Accessories",
+        "value": "accessories",
+        "type": [
+            {
+                "name": "Earring",
+                "value": "earring",
+                "price": [{"q":1, "p":2}, {"q":2, "p":2}, {"q":3, "p":3}, {"q":4, "p":3}, {"q":5, "p":4}]
+            },
+            {
+                "name": "Watch / Bracelet",
+                "value": "watch_bracelet",
+                "price": [{"q":1, "p":3}, {"q":2, "p":3}, {"q":3, "p":5}, {"q":4, "p":5}, {"q":5, "p":7}]
+            },
+            {
+                "name": "Necklace",
+                "value": "necklace",
+                "price": [{"q":1, "p":3}, {"q":2, "p":3}, {"q":3, "p":4}, {"q":4, "p":4}, {"q":5, "p":5}]
+            },
+            {
+                "name": "Sunglasses",
+                "value": "sunglasses",
+                "price": [{"q":1, "p":5}, {"q":2, "p":7}, {"q":3, "p":8}, {"q":4, "p":10}, {"q":5, "p":12}]
+            }
+        ]
     }
 ]
