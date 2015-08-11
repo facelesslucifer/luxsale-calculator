@@ -3,6 +3,12 @@ var app = angular.module("main", [
     "ngCookies"
 ]);
 
+app.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+]);
+
 app.controller("mainController", ["$scope", "$cookies", "Exchange", function ($scope, $cookies, Exchange) {
 
     $scope.model = [];
@@ -25,9 +31,11 @@ app.controller("mainController", ["$scope", "$cookies", "Exchange", function ($s
         Exchange.get()
             .then(function(returnData) {
             if(returnData.status == 200){
-            console.log(returnData);
-            $scope.exchangeRate = rounding(returnData.data.query.results.rate.Rate);
-
+                var startIndex = returnData.data.indexOf('bld>');
+                var endIndex = returnData.data.indexOf('MMK</span>');
+                var finalString = returnData.data.substring(startIndex + 4, endIndex);
+                var finalDouble = parseFloat(finalString) + 15;
+                $scope.exchangeRate = rounding(finalDouble);
             }
         });
     }
