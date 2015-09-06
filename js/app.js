@@ -35,22 +35,24 @@ app.controller("mainController", ["$scope", "$cookies", "Exchange", "SweetAlert"
         total : 0
     };
 
+    $scope.exchangeRate = 910
+
     // get the exchange rate api
-    if(! $cookies.get("exchangeRate")) {
-        Exchange.get()
-            .then(function(returnData) {
-            if(returnData.status == 200){
-                var startIndex = returnData.data.indexOf('bld>');
-                var endIndex = returnData.data.indexOf('MMK</span>');
-                var finalString = returnData.data.substring(startIndex + 4, endIndex);
-                var finalDouble = parseFloat(finalString) + 15;
-                $scope.exchangeRate = rounding(finalDouble);
-            }
-        });
-    }
-    else {
-        $scope.exchangeRate = rounding($cookies.get("exchangeRate"));
-    }
+    // if(! $cookies.get("exchangeRate")) {
+    //     Exchange.get()
+    //         .then(function(returnData) {
+    //         if(returnData.status == 200){
+    //             var startIndex = returnData.data.indexOf('bld>');
+    //             var endIndex = returnData.data.indexOf('MMK</span>');
+    //             var finalString = returnData.data.substring(startIndex + 4, endIndex);
+    //             var finalDouble = parseFloat(finalString) + 15;
+    //             $scope.exchangeRate = rounding(finalDouble);
+    //         }
+    //     });
+    // }
+    // else {
+    //     $scope.exchangeRate = rounding($cookies.get("exchangeRate"));
+    // }
 
     // change event for Item dropdown
     $scope.dataItemChange = function() {
